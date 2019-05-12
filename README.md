@@ -1,43 +1,51 @@
-## ÂÛÎÄÒªµã
-1. ÀûÓÃface detectionºÍ face alignment ÕâÁ½ÖÖÈÎÎñÖ®¼äµÄ¹²ÐÔ£¬Í¨¹ý¹²ÏíÌØÕ÷£¬Ò»¸öCNNÍ¬Ê±¸ÉÁ½¼þÊÂ¡£
-2. ¼¶Áª,×÷ÕßÉè¼ÆµÄCNN·Ö3¸östage£¨ÄÜ¿ìËÙ²úÉúºòÑ¡´°¿ÚµÄÇ³²ãCNN --feed--> ÄÜÌÞ³ý´óÁ¿´íÎóÊý¾ÝµÄÉÔ¸´ÔÓµÄCNN --feed--> ÄÜ±ê³ölandmark¸´ÔÓCNN£©¡£ÕâÑùÐÔÄÜÌá¸ßºÜ¶à¡£
-3. Online hard sample mining¡£·´Ïò´«²¥Ö»¼ÆËã´ú¼Û×î¸ßµÄ70%µÄÑù±¾µÄÌÝ¶ÈÏÂ½µ¡£Ìá¸ßÁËÐÔÄÜ¡£
-4. ×ÜµÄÑ§Ï°ËðÊ§¸ù¾ÝÈÎÎñÖØÒªÐÔ¶¯Ì¬¼ÆËã¡££¨ÔÚ²»Í¬stages ×éºÏ face/non-face classification + bounding box regression + facial landmark localizationÕâÈýÕßµÄËðÊ§ £©
-5. ÓÅ»¯filters£¬Ê¹ÓÃ¸üÐ¡¸ü¶àÑùµÄ¹ýÂËÆ÷¡£
+## Description
+This work is used for reproduce MTCNN,a Joint Face Detection and Alignment using Multi-task Cascaded Convolutional Networks.
 
-## ´òËãÈçºÎÊµÏÖ£¿
-0. Ê×ÏÈ¸ù¾ÝÂÛÎÄ½¨Á¢P R O Èý¸öÍøÂçÄ£ÐÍ
-
-1. ½¨Á¢Í¼Ïñ½ð×ÖËþ
-½«Ô­Í¼³ß´ç·´¸´³ËÒÔËõ·ÅÒò×Ó£¬ÒÔ±ãµÃµ½¸ü¶àµÄboundingbox¡£
-
-2. ½«µÃµ½²»Í¬³ß´çµÄÍ¼Æ¬·ÅÈëµ½PNetÖÐ×öÇ°ÏòÔËËã
-½«ÉÏÒ»²½µÄN¸öËõ·ÅºóµÄÍ¼Æ¬£¬·Åµ½PNetÍøÂç£¬µÃµ½boundingboxex
-
-3. ÓÃRNetÉ¸Ñ¡ºòÑ¡µÄboundingbox
-Ê×ÏÈ°´ÕÕÃ¿¸öºòÑ¡¿ò×ø±êÐÅÏ¢ÔÚÔ­Í¼ÖÐ»ñÈ¡Êý¾Ý£¬²¢ÇÒ½«ËùÓÐµÄÊý¾ÝimResampleµ½£¨24£¬24£©µÄ³ß´ç£¬·½±ãËÍÈëµ½RNetÍøÂçÖÐ×öÇ°ÏòÔËËã¡£É¸Ñ¡µôÒ»²¿·ÖºòÑ¡¿ò¡£
-
-4. ONet¶ÔRNetµÄÊä³ö×÷½øÒ»²½´¦Àí£¬µÃµ½Î¨Ò»µÄºòÑ¡¿ò
-Ê×ÏÈ°´ÕÕÃ¿¸öºòÑ¡¿ò×ø±êÐÅÏ¢ÔÚÔ­Í¼ÖÐ»ñÈ¡Êý¾Ý£¬²¢ÇÒ½«ËùÓÐµÄÊý¾ÝimResampleµ½£¨48£¬48£©µÄ³ß´ç£¬·½±ãËÍÈëµ½ONetÍøÂçÖÐ×öÇ°ÏòÔËËã¡£É¸Ñ¡µôÒ»²¿·ÖºòÑ¡¿ò,µÃµ½Î¨Ò»µÄÈËÁ³¿ò¡£
-¸ù¾ÝONetµÄÎå¸öÌØÕ÷µã×ø±êÖµµÄÊä³ö£¬°´ÕÕ´úÂë¶ÔÓ¦¹ØÏµ£¬µÃµ½Ô­Í¼¶ÔÓ¦µÄÎå¸ö¹Ø¼üµãµÄ×ø±êÖµ¡£
-
-##Train
-ÕýÑù±¾£ºIoU >= 0.65
-¸ºÑù±¾£ºIoU < 0.3
-²¿·Ö(part)Ñù±¾£º0.65 > IoU >= 0.4
-landmarkÑù±¾
-
-Õý¸ºÑù±¾ÓÃÓÚface classification tasks
-¸ºÑù±¾ºÍpartÑù±¾ÓÃÓÚbounding box regression
-landmarkÑù±¾ ÓÃÓÚfacial landmark localization
-landmark faces are used for facial landmark localization. 
 
 ## Demo usage
-£¨ËµÃ÷£ºÊ¹ÓÃpython + tensorflow ÊµÏÖ±È½Ï·½±ã£¬¹Ê´Ë°æ±¾Ê¹ÓÃpythonÐ´µÄ£¬ºóÆÚ¿É¸ÄÎªC++£©
+ï¼ˆè¯´æ˜Žï¼šä½¿ç”¨python + tensorflow å®žçŽ°æ¯”è¾ƒæ–¹ä¾¿ï¼Œæ•…æ­¤ç‰ˆæœ¬ä½¿ç”¨pythonå†™çš„ï¼ŒåŽæœŸå¯æ”¹ä¸ºC++ï¼‰
 
-1. ´î½¨tensorflow, ²Î¿¼https://www.tensorflow.org/install
-2. °²×°python°ü: opencv, numpy
+1. æ­å»ºtensorflow, å‚è€ƒhttps://www.tensorflow.org/install
+2. å®‰è£…pythonåŒ…: opencv, numpy
 3. python ./facedetect_mtcnn.py --input ./test.jpg --output  new.jpg
 
+
 ## Results
-Çë¼ûµ±Ç°Ä¿Â¼ÏÂµÄtest.jpg ºÍ new.jpg
+![test.jpg](./test.jpg)
+![new.jpg](./new.jpg)
+
+
+## è®ºæ–‡è¦ç‚¹
+1. åˆ©ç”¨face detectionå’Œ face alignment è¿™ä¸¤ç§ä»»åŠ¡ä¹‹é—´çš„å…±æ€§ï¼Œé€šè¿‡å…±äº«ç‰¹å¾ï¼Œä¸€ä¸ªCNNåŒæ—¶å¹²ä¸¤ä»¶äº‹ã€‚
+2. çº§è”,ä½œè€…è®¾è®¡çš„CNNåˆ†3ä¸ªstageï¼ˆèƒ½å¿«é€Ÿäº§ç”Ÿå€™é€‰çª—å£çš„æµ…å±‚CNN --feed--> èƒ½å‰”é™¤å¤§é‡é”™è¯¯æ•°æ®çš„ç¨å¤æ‚çš„CNN --feed--> èƒ½æ ‡å‡ºlandmarkå¤æ‚CNNï¼‰ã€‚è¿™æ ·æ€§èƒ½æé«˜å¾ˆå¤šã€‚
+3. Online hard sample miningã€‚åå‘ä¼ æ’­åªè®¡ç®—ä»£ä»·æœ€é«˜çš„70%çš„æ ·æœ¬çš„æ¢¯åº¦ä¸‹é™ã€‚æé«˜äº†æ€§èƒ½ã€‚
+4. æ€»çš„å­¦ä¹ æŸå¤±æ ¹æ®ä»»åŠ¡é‡è¦æ€§åŠ¨æ€è®¡ç®—ã€‚ï¼ˆåœ¨ä¸åŒstages ç»„åˆ face/non-face classification + bounding box regression + facial landmark localizationè¿™ä¸‰è€…çš„æŸå¤± ï¼‰
+5. ä¼˜åŒ–filtersï¼Œä½¿ç”¨æ›´å°æ›´å¤šæ ·çš„è¿‡æ»¤å™¨ã€‚
+
+## æ‰“ç®—å¦‚ä½•å®žçŽ°ï¼Ÿ
+0. é¦–å…ˆæ ¹æ®è®ºæ–‡å»ºç«‹P R O ä¸‰ä¸ªç½‘ç»œæ¨¡åž‹
+
+1. å»ºç«‹å›¾åƒé‡‘å­—å¡”
+å°†åŽŸå›¾å°ºå¯¸åå¤ä¹˜ä»¥ç¼©æ”¾å› å­ï¼Œä»¥ä¾¿å¾—åˆ°æ›´å¤šçš„boundingboxã€‚
+
+2. å°†å¾—åˆ°ä¸åŒå°ºå¯¸çš„å›¾ç‰‡æ”¾å…¥åˆ°PNetä¸­åšå‰å‘è¿ç®—
+å°†ä¸Šä¸€æ­¥çš„Nä¸ªç¼©æ”¾åŽçš„å›¾ç‰‡ï¼Œæ”¾åˆ°PNetç½‘ç»œï¼Œå¾—åˆ°boundingboxex
+
+3. ç”¨RNetç­›é€‰å€™é€‰çš„boundingbox
+é¦–å…ˆæŒ‰ç…§æ¯ä¸ªå€™é€‰æ¡†åæ ‡ä¿¡æ¯åœ¨åŽŸå›¾ä¸­èŽ·å–æ•°æ®ï¼Œå¹¶ä¸”å°†æ‰€æœ‰çš„æ•°æ®imResampleåˆ°ï¼ˆ24ï¼Œ24ï¼‰çš„å°ºå¯¸ï¼Œæ–¹ä¾¿é€å…¥åˆ°RNetç½‘ç»œä¸­åšå‰å‘è¿ç®—ã€‚ç­›é€‰æŽ‰ä¸€éƒ¨åˆ†å€™é€‰æ¡†ã€‚
+
+4. ONetå¯¹RNetçš„è¾“å‡ºä½œè¿›ä¸€æ­¥å¤„ç†ï¼Œå¾—åˆ°å”¯ä¸€çš„å€™é€‰æ¡†
+é¦–å…ˆæŒ‰ç…§æ¯ä¸ªå€™é€‰æ¡†åæ ‡ä¿¡æ¯åœ¨åŽŸå›¾ä¸­èŽ·å–æ•°æ®ï¼Œå¹¶ä¸”å°†æ‰€æœ‰çš„æ•°æ®imResampleåˆ°ï¼ˆ48ï¼Œ48ï¼‰çš„å°ºå¯¸ï¼Œæ–¹ä¾¿é€å…¥åˆ°ONetç½‘ç»œä¸­åšå‰å‘è¿ç®—ã€‚ç­›é€‰æŽ‰ä¸€éƒ¨åˆ†å€™é€‰æ¡†,å¾—åˆ°å”¯ä¸€çš„äººè„¸æ¡†ã€‚
+æ ¹æ®ONetçš„äº”ä¸ªç‰¹å¾ç‚¹åæ ‡å€¼çš„è¾“å‡ºï¼ŒæŒ‰ç…§ä»£ç å¯¹åº”å…³ç³»ï¼Œå¾—åˆ°åŽŸå›¾å¯¹åº”çš„äº”ä¸ªå…³é”®ç‚¹çš„åæ ‡å€¼ã€‚
+
+## Train
+æ­£æ ·æœ¬ï¼šIoU >= 0.65
+è´Ÿæ ·æœ¬ï¼šIoU < 0.3
+éƒ¨åˆ†(part)æ ·æœ¬ï¼š0.65 > IoU >= 0.4
+landmarkæ ·æœ¬
+
+æ­£è´Ÿæ ·æœ¬ç”¨äºŽface classification tasks
+è´Ÿæ ·æœ¬å’Œpartæ ·æœ¬ç”¨äºŽbounding box regression
+landmarkæ ·æœ¬ ç”¨äºŽfacial landmark localization
+landmark faces are used for facial landmark localization. 
+
