@@ -39,12 +39,19 @@ This work is used for reproduce MTCNN,a Joint Face Detection and Alignment using
 
 ## Train
 正样本：IoU >= 0.65
+
 负样本：IoU < 0.3
+
 部分(part)样本：0.65 > IoU >= 0.4
+
 landmark样本
 
+
 正负样本用于face classification tasks
+
 负样本和part样本用于bounding box regression
+
 landmark样本 用于facial landmark localization
+
 landmark faces are used for facial landmark localization. 
 
