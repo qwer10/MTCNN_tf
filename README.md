@@ -21,7 +21,7 @@ This work is used for reproduce MTCNN,a Joint Face Detection and Alignment using
 4. 总的学习损失根据任务重要性动态计算。（在不同stages 组合 face/non-face classification + bounding box regression + facial landmark localization这三者的损失 ）
 5. 优化filters，使用更小更多样的过滤器。
 
-## 打算如何实现？
+## 大致实现步骤
 0. 首先根据论文建立P R O 三个网络模型
 
 1. 建立图像金字塔
